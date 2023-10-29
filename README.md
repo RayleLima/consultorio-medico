@@ -1,23 +1,20 @@
-![](https://i.imgur.com/xG74tOh.png)
-
-# Desafio Alternativo Módulo 2 - Back-end
-
-## Como entregar?
+# API consultório medico
+## Requisitos: 
+* Nodejs
+* git
+  
+## Como instalar?
 
 - [ ] Faça o fork desse repositório para o seu GitHub
 - [ ] Clone o seu repositório em sua máquina
-- [ ] Desenvolva seu projeto, fazendo commits a cada alteração e push
-- [ ] Crie um PR (pull request)
-- [ ] Envie o link do pull request que você criou na plataforma da Cubos
+- [ ] No terminal use o comando `npm install`
+- [ ] Suba o servidor com o comando `npm run dev`
 
-### ⚠️ Importante: Se o pull request não for criado e enviado na plataforma o feedback não será fornecido e constará como não entregue
+## Resumo da API
 
-## Instruções
+Esse é um pojeto **MVP** (Produto Viável Mínimo), ou seja, em um futuro próximo outras funcionalidade surgirão para agragar ainda mais ao projeto, sendo assim os dados do banco (nomePaciente, consultório, etc.) serão imutáveis (estáticos).
 
-Você acabou de ser contratado pela melhor empresa de tecnologia do mundo: a **CUBOS**.
-Sua primeira tarefa como programador é criar uma api para um Consultório Médico. Esse será um pojeto **MVP** (Produto Viável Mínimo), ou seja, em um futuro próximo outras funcionalidade surgirão para agragar ainda mais ao projeto, sendo assim os dados do banco (nomePaciente, consultório, etc.) serão imutáveis (estáticos).
-
-Seu papel enquanto desenvolvedor será construir uma RESTful API que permita:
+RESTful API que permite:
 
 - Criar consulta médica
 - Listar consultas médicas
@@ -26,18 +23,6 @@ Seu papel enquanto desenvolvedor será construir uma RESTful API que permita:
 - Finalizar uma consulta médica
 - Listar o laudo de uma consulta
 - Listar as consultas que um médico atendeu
-
-**Importante: Sempre que a validação de uma requisição falhar, responda com código de erro e mensagem adequada à situação, ok?**
-
-**Exemplo**
-
-```javascript
-// Quando é informado que uma consulta não existe:
-// HTTP Status
-{
-  "mensagem": "Consulta inexistente!"
-}
-```
 
 ## Persistências dos dados
 
@@ -77,37 +62,6 @@ Os dados serão persistidos em memória, no objeto existente dentro do arquivo `
 }
 ```
 
-## Requisitos obrigatórios
-
-- Sua API deve seguir o padrão REST
-- Seu código deve estar organizado, delimitando as responsabilidades de cada arquivo adequadamente. Ou seja, é esperado que ele tenha, no mínimo a seguinte estrutura:
-  - src/
-    - controladores/
-      - **_seus controladores vão aqui_**
-    - bancodedados.js
-    - rotas.js
-    - index.js
-- Qualquer valor (dinheiro) deverá ser representado em centavos (Ex.: R$ 10,00 reais = 1000).
-- Evite códigos duplicados. Antes de copiar e colar, pense se não faz sentido esse pedaço de código estar centralizado numa função.
-- Quando o enunciado do end-point frizar o armazenamento em memória, o mesmo esta se referindo ao arquivo **_bancodedados.js_**, ou seja, a persistência deve ser feita no arquivo **_bancodedados.js_**.
-
-## Status Code
-
-Abaixo, listamos os possíveis **_status code_** esperados como resposta da API.
-
-(Obs.): A lista abaixo são exemplos que **_podem_** ou **_não_** ser utilizados no projeto, ou seja, não se faz necessário o uso de todos.
-
-```javascript
-// 200 (OK) = requisição bem sucedida
-// 201 (Created) = requisição bem sucedida e algo foi criado
-// 204 (No Content) = requisição bem sucedida, sem conteúdo no corpo da resposta
-// 400 (Bad Request) = o servidor não entendeu a requisição pois está com uma sintaxe/formato inválido
-// 401 (Unauthorized) = o usuário não está autenticado (logado)
-// 403 (Forbidden) = o usuário não tem permissão de acessar o recurso solicitado
-// 404 (Not Found) = o servidor não pode encontrar o recurso solicitado
-// 500 (Internal Server Error) = falhas causadas pelo servidor
-```
-
 ## Endpoints
 
 ### Listar consultas médicas
@@ -116,10 +70,10 @@ Abaixo, listamos os possíveis **_status code_** esperados como resposta da API.
 
 Esse end-point deverá listar todas as consultas médicas.
 
-- Você deverá, **OBRIGATORIAMENTE**:
+- **Restrições aplicadas**:
 
-  - Verificar se o cnes e a senha do consultório foram informados (passado como query params na url).
-  - Validar se o cnes a senha do consultório estão corretos.
+  - Verifica se o cnes e a senha do consultório foram informados (passado como query params na url).
+  - Valida se o cnes a senha do consultório estão corretos.
 
 - **Requisição** - query params (Siga o padrão de nomenclatura)
 
@@ -185,17 +139,17 @@ Esse end-point deverá listar todas as consultas médicas.
 
 #### `POST` `/consulta`
 
-Esse endpoint deverá criar uma consulta médica, onde será gerado um identificador único para identificação da consulta (identicador da consulta).
+Esse endpoint cria uma consulta médica, onde é gerado um identificador único para identificação da consulta (identicador da consulta).
 
-- Você deverá, **OBRIGATORIAMENTE**:
+- **Restrições aplicadas**:
 
-  - Verificar se todos os campos foram informados (todos são obrigatórios)
+  - Verifica se todos os campos foram informados (todos são obrigatórios)
   - Verifica se o valor da consulta é numérico
-  - Verificar se o CPF informado já não está vinculado a nenhuma consulta que não foi finalizada
-  - Validar se o tipo da consulta informado consta nas especialidade dos médicos na base
-  - Vincular o identificador do médico especializado que irá atender a consulta em questão no momento de criação da consulta
-  - Definir _finalizada_ como false
-  - Criar uma consulta médica cuja o identificador é único
+  - Verifica se o CPF informado já não está vinculado a nenhuma consulta que não foi finalizada
+  - Valida se o tipo da consulta informado consta nas especialidade dos médicos na base
+  - Vincula o identificador do médico especializado que irá atender a consulta em questão no momento de criação da consulta
+  - Defini _finalizada_ como false
+  - Cria uma consulta médica cuja o identificador é único
 
 - **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
@@ -211,8 +165,8 @@ Esse endpoint deverá criar uma consulta médica, onde será gerado um identific
 
 - **Resposta**
 
-  Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-   Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+  Em caso de **sucesso**, não envia conteúdo no corpo (body) da resposta.  
+   Em caso de **falha na validação**, a resposta possui **_status code_** apropriado, e em seu corpo (body) possui um objeto com uma propriedade **mensagem** que possui como valor um texto explicando o motivo da falha.
 
 #### Exemplo de Requisição
 
@@ -250,18 +204,18 @@ Esse endpoint deverá criar uma consulta médica, onde será gerado um identific
 
 #### `PUT` `/consulta/:identificadorConsulta/paciente`
 
-Esse endpoint deverá atualizar apenas os dados do paciente de uma consulta médica que não esteja finalizada.
+Esse endpoint atualiza apenas os dados do paciente de uma consulta médica que não esteja finalizada.
 
-- Você deverá, **OBRIGATORIAMENTE**:
+- **Restrições aplicadas**:
 
-  - Verificar se foi passado todos os campos no body da requisição
-  - Verificar se o identificador da consulta passado como parametro na URL é válido
-  - Se o CPF for informado, verificar se já existe outro registro com o mesmo CPF
-  - Se o E-mail for informado, verificar se já existe outro registro com o mesmo E-mail
+  - Verifica se foi passado todos os campos no body da requisição
+  - Verifica se o identificador da consulta passado como parametro na URL é válido
+  - Se o CPF for informado, verifica se já existe outro registro com o mesmo CPF
+  - Se o E-mail for informado, verifica se já existe outro registro com o mesmo E-mail
   - Verifica se a consulta não esta finalizada
-  - Atualizar os dados do usuário de uma consulta médica
+  - Atualiza os dados do usuário de uma consulta médica
 
-- **Requisição** - O corpo (body) deverá possuir um objeto com todas as seguintes propriedades (respeitando estes nomes):
+- **Requisição** - O corpo (body) possui um objeto com todas as seguintes propriedades (respeitando estes nomes):
 
   - nome
   - cpf
@@ -272,8 +226,8 @@ Esse endpoint deverá atualizar apenas os dados do paciente de uma consulta méd
 
 - **Resposta**
 
-  Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.
-  Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+  Em caso de **sucesso**, não é enviado conteúdo no corpo (body) da resposta.
+  Em caso de **falha na validação**, a resposta possui **_status code_** apropriado, e em seu corpo (body) possui um objeto com uma propriedade **mensagem** que possui como valor um texto explicando o motivo da falha.
 
 #### Exemplo de Requisição
 
@@ -307,13 +261,13 @@ Esse endpoint deverá atualizar apenas os dados do paciente de uma consulta méd
 
 #### `DELETE` `/consulta/:identificadorConsulta`
 
-Esse endpoint deve cancelar uma consulta médica existente, esta consulta não pode estar _finalizada_.
+Esse endpoint cancela uma consulta médica existente, esta consulta não pode estar _finalizada_.
 
-- Você deverá, **OBRIGATORIAMENTE**:
+- **Restrições aplicadas**:
 
-  - Verificar se o identificador da consulta médica passado como parametro na URL é válido
-  - Permitir excluir uma consulta apenas se _finalizada_ for igual a false
-  - Remover a consulta do objeto de persistência de dados
+  - Verifica se o identificador da consulta médica passado como parametro na URL é válido
+  - Permiti excluir uma consulta apenas se _finalizada_ for igual a false
+  - Remove a consulta do objeto de persistência de dados
 
 - **Requisição**
 
@@ -321,8 +275,8 @@ Esse endpoint deve cancelar uma consulta médica existente, esta consulta não p
 
 - **Resposta**
 
-  Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-  Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+  Em caso de **sucesso**, não é enviado conteúdo no corpo (body) da resposta.  
+  Em caso de **falha na validação**, a resposta possui **_status code_** apropriado, e em seu corpo (body) possui um objeto com uma propriedade **mensagem** que possuir como valor um texto explicando o motivo da falha.
 
 #### Exemplo de Resposta
 
@@ -342,26 +296,26 @@ Esse endpoint deve cancelar uma consulta médica existente, esta consulta não p
 
 #### `POST` `/consulta/finalizar`
 
-Esse endpoint deverá finalizar uma consulta com um texto de laudo válido do médico e registrar esse laudo e essa consulta finalizada.
+Esse endpoint finaliza uma consulta com um texto de laudo válido do médico e registrar esse laudo e essa consulta finalizada.
 
-- Você deverá, **OBRIGATORIAMENTE**:
+- **Restrições aplicadas**:
 
-  - Verificar se foi passado todos os campos no body da requisição
-  - Verificar se o identificador da consulta existe
-  - Verificar se a consulta já esta finalizada
-  - Verificar se o texto do médico possui um tamanho > 0 e <= 200 carácteres
-  - Armazenar as informações do laudo na persistência de dados
-  - Armazenar a consulta médica finalizada na persistência de dados
+  - Verifica se foi passado todos os campos no body da requisição
+  - Verifica se o identificador da consulta existe
+  - Verifica se a consulta já esta finalizada
+  - Verifica se o texto do médico possui um tamanho > 0 e <= 200 carácteres
+  - Armazena as informações do laudo na persistência de dados
+  - Armazena a consulta médica finalizada na persistência de dados
 
-- **Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+- **Requisição** - O corpo (body) possui um objeto com as seguintes propriedades (respeitando estes nomes):
 
   - identificadorConsulta
   - textoMedico
 
 - **Resposta**
 
-  Em caso de **sucesso**, não deveremos enviar conteúdo no corpo (body) da resposta.  
-  Em caso de **falha na validação**, a resposta deverá possuir **_status code_** apropriado, e em seu corpo (body) deverá possuir um objeto com uma propriedade **mensagem** que deverá possuir como valor um texto explicando o motivo da falha.
+  Em caso de **sucesso**, não é enviado conteúdo no corpo (body) da resposta.  
+  Em caso de **falha na validação**, a resposta possuir **_status code_** apropriado, e em seu corpo (body) possui um objeto com uma propriedade **mensagem** que possui como valor um texto explicando o motivo da falha.
 
 #### Exemplo de Requisição
 
@@ -430,9 +384,9 @@ Esse endpoint deverá finalizar uma consulta com um texto de laudo válido do m�
 
 #### `GET` `/consulta/laudo?identificador_consulta=1&senha=1234`
 
-Esse endpoint deverá retornar informações do laudo de uma consulta junto as informações adicionais das entidades relacionadas aquele laudo.
+Esse endpointá retornar informações do laudo de uma consulta junto as informações adicionais das entidades relacionadas aquele laudo.
 
-- Você deverá, **OBRIGATORIAMENTE**:
+- **Restrições aplicadas**:
 
   - Verificar se o identificador da consulta e a senha foram informados (passado como query params na url)
   - Verificar se a consulta médica informada existe
@@ -480,13 +434,13 @@ Esse endpoint deverá retornar informações do laudo de uma consulta junto as i
 
 #### `GET` `/consultas/medico?identificador_medico=1`
 
-Esse endpoint deverá retornar todas as consultas que um profissional **_atendeu_**, ou seja, finalizadas.
+Esse endpoint retorna todas as consultas que um profissional **_atendeu_**, ou seja, finalizadas.
 
-- Você deverá, **OBRIGATORIAMENTE**:
+- **Restrições aplicadas**:
 
-  - Verificar se o identificador do medico foi informado (passado como query params na url)
-  - Verificar se o médico existe
-  - Exibir as consultas vinculadas ao médico
+  - Verifica se o identificador do medico foi informado (passado como query params na url)
+  - Verifica se o médico existe
+  - Exibi as consultas vinculadas ao médico
 
 - **Requisição** - query params
 
@@ -543,15 +497,5 @@ Esse endpoint deverá retornar todas as consultas que um profissional **_atendeu
 }
 ```
 
-## Aulas úteis:
 
--   [Rotas, Intermediários e Controladores](https://aulas.cubos.academy/turma/7d1513ce-ce03-495f-8b7d-c3aef1522063/aulas/f876e20a-5661-4527-8162-5ecd0da5672c)
--   [Aula API REST](https://aulas.cubos.academy/turma/7d1513ce-ce03-495f-8b7d-c3aef1522063/aulas/d09cc687-abc4-494b-9a56-d7697b5e4d0e)
--   [Formatando datas com date-fns](https://aulas.cubos.academy/turma/7d1513ce-ce03-495f-8b7d-c3aef1522063/aulas/b8198f42-34c5-4c81-a936-6d8aff4d50ce)
--   [Aula objetos](https://aulas.cubos.academy/turma/7d1513ce-ce03-495f-8b7d-c3aef1522063/aulas/6cc31181-71b7-4cea-bf60-3f7a0b64ad86)
--   [Aula funções](https://aulas.cubos.academy/turma/7d1513ce-ce03-495f-8b7d-c3aef1522063/aulas/861b1778-bb3a-4f69-858e-14ee896854c5)
--   [Aula de Revisão](https://aulas.cubos.academy/turma/7d1513ce-ce03-495f-8b7d-c3aef1522063/aulas/7b06e71c-6f34-43dd-a985-1935192ac960)
-
-**LEMBRE-SE**: Feito é melhor do que perfeito, mas não faça mal feito!!!
-
-###### tags: `back-end` `módulo 2` `nodeJS` `API REST` `desafio-alternativo`
+###### tags: `back-end` `nodeJS` `API REST`
