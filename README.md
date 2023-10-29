@@ -1,9 +1,10 @@
 # API consultório medico
+
 ## Requisitos: 
 * Nodejs
 * git
   
-## Como instalar?
+## Como executar?
 
 - [ ] Faça o fork desse repositório para o seu GitHub
 - [ ] Clone o seu repositório em sua máquina
